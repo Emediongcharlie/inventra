@@ -64,4 +64,14 @@ public class Items {
     private Category category;
     private Long serialNumber;
     private LocalDateTime dateTime;
+
+    public ItemStatus getItemStatus() {
+        return itemStatus;
+    }
+
+    public void setItemStatus(ItemStatus itemStatus) {
+        this.itemStatus = itemStatus;
+    }
+
+    private ItemStatus itemStatus;
 }

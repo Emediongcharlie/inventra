@@ -8,10 +8,7 @@ import com.inventra.inventra.dtos.requests.AddItemRequest;
 import com.inventra.inventra.dtos.requests.DeleteItemRequest;
 import com.inventra.inventra.dtos.requests.FindByItemNameRequest;
 import com.inventra.inventra.dtos.requests.UpdateItemsRequest;
-import com.inventra.inventra.dtos.responses.AddItemsResponse;
-import com.inventra.inventra.dtos.responses.DeleteItemResponse;
-import com.inventra.inventra.dtos.responses.FindByItemNameResponse;
-import com.inventra.inventra.dtos.responses.UpdateItemResponse;
+import com.inventra.inventra.dtos.responses.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -89,5 +86,14 @@ public class ItemServiceImpl implements ItemsServices{
         deleteItemResponse.setId(item.getItemId());
         deleteItemResponse.setMessage("Item " + item.getItemId() + " deleted successfully");
         return deleteItemResponse;
+    }
+
+    @Override
+    public DeleteAllItemsResponse deleteAllItems() {
+        itemsRepo.deleteAll();
+
+        DeleteAllItemsResponse response = new DeleteAllItemsResponse();
+        response.setMessage("Successfully Deleted All Items");
+        return response;
     }
 }

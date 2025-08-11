@@ -4,7 +4,7 @@ import com.inventra.inventra.data.models.Role;
 
 public class RegisterUserResponse {
 
-    private String id;
+    private Long id;
     private String name;
     private Role role;
 
@@ -32,11 +32,11 @@ public class RegisterUserResponse {
         this.name = name;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

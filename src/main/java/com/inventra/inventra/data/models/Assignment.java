@@ -57,4 +57,14 @@ public class Assignment {
     private Collectors collectorId;
     private LocalDateTime assignmentDateTime;
     private LocalDateTime returnDateTime;
+
+    public ItemStatus getItemStatus() {
+        return itemStatus;
+    }
+
+    public void setItemStatus(ItemStatus itemStatus) {
+        this.itemStatus = itemStatus;
+    }
+
+    private ItemStatus itemStatus;
 }
