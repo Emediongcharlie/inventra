@@ -13,4 +13,5 @@ public interface ItemsServices {
     UpdateItemResponse updateItem(UpdateItemsRequest updateItemRequest);;
     DeleteItemResponse deleteItem(DeleteItemRequest deleteItemRequest);
     DeleteAllItemsResponse deleteAllItems();
+    ItemsReportResponse reportItem();
 }

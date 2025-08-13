@@ -58,6 +58,17 @@ public class Assignment {
     private LocalDateTime assignmentDateTime;
     private LocalDateTime returnDateTime;
 
+    public Collectors getCollectorName() {
+        return collectorName;
+    }
+
+    public void setCollectorName(Collectors collectorName) {
+        this.collectorName = collectorName;
+    }
+
+    @OneToOne
+    private Collectors collectorName;
+
     public ItemStatus getItemStatus() {
         return itemStatus;
     }

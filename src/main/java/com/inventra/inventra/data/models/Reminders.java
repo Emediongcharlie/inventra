@@ -1,9 +1,6 @@
 package com.inventra.inventra.data.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Reminders {
@@ -16,11 +13,11 @@ public class Reminders {
         this.reminderId = reminderId;
     }
 
-    public Long getAssignmentId() {
+    public Assignment getAssignmentId() {
         return assignmentId;
     }
 
-    public void setAssignmentId(Long assignmentId) {
+    public void setAssignmentId(Assignment assignmentId) {
         this.assignmentId = assignmentId;
     }
 
@@ -35,6 +32,7 @@ public class Reminders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reminderId;
-    private Long assignmentId;
+    @ManyToOne
+    private Assignment assignmentId;
     private boolean isStatus;
 }

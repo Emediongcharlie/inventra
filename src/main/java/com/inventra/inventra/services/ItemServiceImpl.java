@@ -96,4 +96,13 @@ public class ItemServiceImpl implements ItemsServices{
         response.setMessage("Successfully Deleted All Items");
         return response;
     }
+
+    @Override
+    public ItemsReportResponse reportItem() {
+        itemsRepo.findAll();
+
+        ItemsReportResponse response = new ItemsReportResponse();
+        response.setMessage("Successfully Reported Items");
+        return response;
+    }
 }

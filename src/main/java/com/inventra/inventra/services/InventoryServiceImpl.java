@@ -1,22 +1,22 @@
 package com.inventra.inventra.services;
 
-import com.inventra.inventra.data.models.Assignment;
-import com.inventra.inventra.data.models.ItemStatus;
-import com.inventra.inventra.data.models.Items;
-import com.inventra.inventra.data.models.Users;
+import com.inventra.inventra.data.models.*;
 import com.inventra.inventra.data.repositories.AssignmentRepo;
-import com.inventra.inventra.data.repositories.InventoryManagerRepo;
+import com.inventra.inventra.data.repositories.CollectorRepo;
 import com.inventra.inventra.data.repositories.ItemsRepo;
 import com.inventra.inventra.data.repositories.UserRepo;
 import com.inventra.inventra.dtos.requests.AssignItemRequest;
+import com.inventra.inventra.dtos.requests.InventoryLevelReportRequest;
 import com.inventra.inventra.dtos.requests.TrackItemStatusRequest;
 import com.inventra.inventra.dtos.responses.AssignItemsResponse;
+import com.inventra.inventra.dtos.responses.InventoryLevelReportResponse;
 import com.inventra.inventra.dtos.responses.TrackItemStatusResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service
 public class InventoryServiceImpl implements InventoryServices{
@@ -27,6 +27,8 @@ public class InventoryServiceImpl implements InventoryServices{
     ItemsRepo itemsRepo;
     @Autowired
     private UserRepo userRepo;
+    @Autowired
+    private CollectorRepo collectorRepo;
 
 
     @Override
@@ -73,4 +75,22 @@ public class InventoryServiceImpl implements InventoryServices{
         response.setMessage("Item status retrieved successfully");
         return response;
     }
+
+    @Override
+    public List<Items> generateReport(InventoryLevelReportRequest generateReportRequest) {
+        return itemsRepo.findAll();
+    }
+
+    @Override
+    public List<Collectors> generateCollectorsReport(InventoryLevelReportRequest generateReportRequest) {
+        return collectorRepo.findAll();
+    }
+
+    @Override
+    public InventoryLevelReportResponse getInventoryLevelReport(InventoryLevelReportRequest getInventoryLevelReportRequest) {
+
+        return null;
+    }
+
+
 }
