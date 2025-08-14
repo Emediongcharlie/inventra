@@ -56,6 +56,16 @@ public class SendReminderResponse {
     private Items itemsName;
     private LocalDateTime overdue;
 
+    public Long getDaysOverdue() {
+        return daysOverdue;
+    }
+
+    public void setDaysOverdue(Long daysOverdue) {
+        this.daysOverdue = daysOverdue;
+    }
+
+    private Long daysOverdue;
+
     public Long getReminderId() {
         return reminderId;
     }

@@ -16,12 +16,12 @@ public class SendReminderRequest {
 
     private Collectors collectorEmail;
 
-    public Assignment getAssignmentId() {
-        return assignmentId;
+    public Assignment getAssignment() {
+        return assignment;
     }
 
-    public void setAssignmentId(Assignment assignmentId) {
-        this.assignmentId = assignmentId;
+    public void setAssignmentId(Assignment assignment) {
+        this.assignment = assignment;
     }
 
     public boolean isStatus() {
@@ -32,7 +32,7 @@ public class SendReminderRequest {
         isStatus = status;
     }
 
-    private Assignment assignmentId;
+    private Assignment assignment;
     private boolean isStatus;
 
 }

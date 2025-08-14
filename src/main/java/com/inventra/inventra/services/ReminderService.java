@@ -5,5 +5,5 @@ import com.inventra.inventra.dtos.responses.SendReminderResponse;
 
 public interface ReminderService {
 
-    SendReminderResponse sentReminder(SendReminderRequest sendReminderRequest);
+    SendReminderResponse sendManualReminder(SendReminderRequest sendReminderRequest);
 }

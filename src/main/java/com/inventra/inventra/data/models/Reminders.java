@@ -2,6 +2,8 @@ package com.inventra.inventra.data.models;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class Reminders {
 
@@ -35,4 +37,24 @@ public class Reminders {
     @ManyToOne
     private Assignment assignmentId;
     private boolean isStatus;
+
+    public LocalDateTime getReminderTime() {
+        return reminderTime;
+    }
+
+    public void setReminderTime(LocalDateTime reminderTime) {
+        this.reminderTime = reminderTime;
+    }
+
+    private LocalDateTime reminderTime;
+
+    public Long getOverDueDays() {
+        return overDueDays;
+    }
+
+    public void setOverDueDays(Long overDueDays) {
+        this.overDueDays = overDueDays;
+    }
+
+    private Long overDueDays;
 }

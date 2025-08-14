@@ -78,4 +78,14 @@ public class Assignment {
     }
 
     private ItemStatus itemStatus;
+
+    public boolean isReturned() {
+        return returned;
+    }
+
+    public void setReturned(boolean returned) {
+        this.returned = returned;
+    }
+
+    private boolean returned = false;
 }
