@@ -48,9 +48,6 @@ public class ReminderServiceImpl implements ReminderService {
             return response;
         }
 
-        /**
-         * Manual reminder trigger
-         */
         public SendReminderResponse sendManualReminder(SendReminderRequest request) {
             Assignment assignment = assignmentRepo.findById(request.getAssignment().getAssignmentId())
                     .orElseThrow(() -> new RuntimeException("Assignment not found"));
@@ -62,10 +59,8 @@ public class ReminderServiceImpl implements ReminderService {
                 throw new RuntimeException("Item is not yet overdue");
             }
 
-            // Send & Log reminder
             sendAndLogReminder(assignment, daysOverdue);
 
-            // Build response
             SendReminderResponse response = new SendReminderResponse();
             response.setReminderId(null); // Will be set after DB save
             response.setItemsId(assignment.getItemId());
@@ -76,13 +71,10 @@ public class ReminderServiceImpl implements ReminderService {
             return response;
         }
 
-        /**
-         * Helper method to send reminder and log it in DB
-         */
         private void sendAndLogReminder(Assignment assignment, long daysOverdue) {
             String message = String.format(
                     "Reminder: Item ID %d assigned to you is %d days overdue. Please return it.",
-                    assignment.getItemId(),
+                    assignment.getItemId().getItemId(),
                     daysOverdue
             );
 
