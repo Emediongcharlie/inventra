@@ -28,31 +28,35 @@ public class ConfigSecurity {
         return provider;
     }
 
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+            http.authorizeHttpRequests(configurer -> configurer
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(configurer -> configurer
-                .requestMatchers(HttpMethod.POST, "/book/register/seller/").permitAll()
-                .requestMatchers(HttpMethod.GET, "/book/login/seller/").permitAll()
-                .requestMatchers(HttpMethod.POST, "/book/register/customer/").permitAll()
-                .requestMatchers(HttpMethod.GET, "/book/login/customer/").permitAll()
-                .requestMatchers(HttpMethod.GET, "/product/search-product/").permitAll()
-                .requestMatchers(HttpMethod.GET, "/product/get-all-products/").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/api/user/register-user").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/api/user/login-user").permitAll()
 
-                .requestMatchers(HttpMethod.GET, "/book/get-all-sellers").hasAnyRole("SELLER", "ADMIN")
-                .requestMatchers(HttpMethod.GET, "/book/search/seller/").hasAnyRole("SELLER", "ADMIN")
-                .requestMatchers(HttpMethod.POST, "/product/add-new-product/").hasAnyRole("SELLER", "ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/product/delete-product/{id}").hasAnyRole("SELLER", "ADMIN")
-                .requestMatchers(HttpMethod.PUT, "/product/edit-product/").hasAnyRole("SELLER", "ADMIN")
+                    .requestMatchers(HttpMethod.POST, "/api/items/add-new-item").hasAnyRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "/api/items/add-new-item").hasAnyRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "/api/items/update-item").hasAnyRole("ADMIN")
+                    .requestMatchers(HttpMethod.DELETE, "/api/items/delete-item").hasAnyRole("ADMIN")
+                    .requestMatchers(HttpMethod.DELETE, "/api/items/delete-all-item").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "/api/items/report-an-item").hasAnyRole("ADMIN")
 
-                .requestMatchers(HttpMethod.GET, "/book/get-all-customers").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.POST, "/api/inventory/assign-items").hasAnyRole("ADMIN", "COLLECTOR")
+                    .requestMatchers(HttpMethod.POST, "/api/inventory/track-status").hasAnyRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "/api/inventory/generate-report").hasAnyRole("ADMIN")
+                    .requestMatchers(HttpMethod.GET, "/api/inventory/generate-inventory-report").hasRole("ADMIN")
 
-                .anyRequest().authenticated()
-        );
+                    .requestMatchers(HttpMethod.POST, "/api/reminder/auto-Reminder").hasAnyRole("ADMIN")
+                    .requestMatchers(HttpMethod.POST, "/api/reminder/manual-Reminder").hasAnyRole("ADMIN")
 
-        http.httpBasic(Customizer.withDefaults());
-        http.csrf(csrf -> csrf.disable());
+                    .anyRequest().authenticated()
+            );
 
-        return http.build();
+            http.httpBasic(Customizer.withDefaults());
+            http.csrf(csrf -> csrf.disable());
+
+            return http.build();
+        }
     }
-}
+

@@ -6,4 +6,5 @@ import com.inventra.inventra.dtos.responses.SendReminderNotificationResponse;
 public interface NotificationService {
 
     SendReminderNotificationResponse sendEmailReminder(String email, String message);
+
 }

@@ -18,34 +18,34 @@ public class ReminderServiceImpl implements ReminderService {
 
         private final AssignmentRepo assignmentRepo;
         private final ReminderRepo reminderRepo;
-//        private final NotificationService notificationService;
+        private final NotificationService notificationService;
 
         public ReminderServiceImpl(AssignmentRepo assignmentRepo,
-                               ReminderRepo reminderRepo) {
+                               ReminderRepo reminderRepo, NotificationService notificationService) {
             this.assignmentRepo = assignmentRepo;
             this.reminderRepo = reminderRepo;
-//            this.notificationService = notificationService;
+            this.notificationService = notificationService;
         }
 
-        /**
-         * Scheduled job: Checks overdue assignments every morning at 8 AM
-         */
         @Scheduled(cron = "0 0 8 * * *")
-        public void checkOverdueAssignments() {
+        public SendReminderResponse checkOverdueAssignments() {
             LocalDateTime now = LocalDateTime.now();
 
-            // Find all overdue items that haven't been returned
             List<Assignment> overdueAssignments =
                     assignmentRepo.findByReturnDateTimeBeforeAndReturnedFalse(now);
 
             for (Assignment assignment : overdueAssignments) {
                 long daysOverdue = ChronoUnit.DAYS.between(assignment.getReturnDateTime(), now);
 
-                // Send reminder only if overdue days are a multiple of 2
                 if (daysOverdue % 2 == 0) {
                     sendAndLogReminder(assignment, daysOverdue);
                 }
             }
+            SendReminderResponse response = new SendReminderResponse();
+            response.setReminderId(null);
+            response.setMessage("Reminder sent successfully");
+
+            return response;
         }
 
         /**
@@ -86,7 +86,7 @@ public class ReminderServiceImpl implements ReminderService {
                     daysOverdue
             );
 
-//            notificationService.sendReminder(assignment.getCollectorId(), message);
+            notificationService.sendEmailReminder(assignment.getCollectorId().getEmail(), message);
 
             Reminders reminder = new Reminders();
             reminder.setAssignmentId(assignment);
